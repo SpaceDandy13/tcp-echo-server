@@ -28,7 +28,7 @@ func personCreate(w http.ResponseWriter, r *http.Request) {
 
     // Do something with the Person struct...
     fmt.Println("succ" )
-    fmt.Fprintf(w, "User: %+v", u)
+    fmt.Fprintf(w, "%+v", u)
 
 }
 
