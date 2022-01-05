@@ -9,7 +9,7 @@ import (
 
 type User struct {
     Email string
-    Password  int
+    Password  string
 }
 
 func personCreate(w http.ResponseWriter, r *http.Request) {
@@ -23,6 +23,7 @@ func personCreate(w http.ResponseWriter, r *http.Request) {
         http.Error(w, err.Error(), http.StatusBadRequest)
         return
     }
+
 
     // Do something with the Person struct...
     fmt.Fprintf(w, "User: %+v", u)
