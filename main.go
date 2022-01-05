@@ -29,7 +29,11 @@ func personCreate(w http.ResponseWriter, r *http.Request) {
     // Do something with the Person struct...
     fmt.Println("succ" )
     w.Header().Add("Content-Type", "application/json")
-    w.WriteHeader(http.StatusCreated)
+    if u.Email == "donny":
+    	w.WriteHeader(http.StatusCreated)
+    else:
+    	http.Error(w, err.Error(), http.StatusBadRequest)
+
     data, err := json.Marshal(u)
     w.Write(data)
 
