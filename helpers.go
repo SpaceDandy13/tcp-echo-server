@@ -8,6 +8,7 @@ import (
     "net/http"
     "strings"
 
+    "github.com/golang/gddo/blob/master/httputil/header"
 )
 
 type malformedRequest struct {
