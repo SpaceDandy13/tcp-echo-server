@@ -32,7 +32,7 @@ func personCreate(w http.ResponseWriter, r *http.Request) {
     if u.Email == "donny" {
     	w.WriteHeader(http.StatusCreated)
     }
-    else{
+    if u.Email != "donny"{
     	http.Error(w, err.Error(), http.StatusBadRequest)
     }
 
