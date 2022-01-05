@@ -30,7 +30,7 @@ func personCreate(w http.ResponseWriter, r *http.Request) {
     fmt.Println("succ" )
     w.Header().Add("Content-Type", "application/json")
     w.WriteHeader(http.StatusCreated)
-    w.write(json.Marshal(u))
+    w.Write(json.Marshal(u))
 
 }
 
