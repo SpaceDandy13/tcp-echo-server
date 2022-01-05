@@ -1,42 +1,37 @@
 package main
 
 import (
-    "errors"
+    "encoding/json"
     "fmt"
     "log"
     "net/http"
 )
 
-type User struct {
-    email string
-    password  string
+type Person struct {
+    Name string
+    Age  int
 }
 
 func personCreate(w http.ResponseWriter, r *http.Request) {
-    var u User
+    // Declare a new Person struct.
+    var p Person
 
-    err := decodeJSONBody(w, r, &u)
+    // Try to decode the request body into the struct. If there is an error,
+    // respond to the client with the error message and a 400 status code.
+    err := json.NewDecoder(r.Body).Decode(&p)
     if err != nil {
-        var mr *malformedRequest
-        if errors.As(err, &mr) {
-            http.Error(w, mr.msg, mr.status)
-        } else {
-            log.Println(err.Error())
-            http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
-        }
+        http.Error(w, err.Error(), http.StatusBadRequest)
         return
     }
 
-    fmt.Fprintf(w, "User: %+v", u)
-
-
+    // Do something with the Person struct...
+    fmt.Fprintf(w, "Person: %+v", p)
 }
 
 func main() {
     mux := http.NewServeMux()
-    mux.HandleFunc("/login", personCreate)
+    mux.HandleFunc("/person/create", personCreate)
 
-    log.Println("Starting server on :4000...")
     err := http.ListenAndServe(":4000", mux)
     log.Fatal(err)
 }
