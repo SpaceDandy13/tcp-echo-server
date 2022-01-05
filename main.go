@@ -8,8 +8,8 @@ import (
 )
 
 type User struct {
-    email string
-    password  string
+    Email string
+    Password  string
 }
 
 func personCreate(w http.ResponseWriter, r *http.Request) {
