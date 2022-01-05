@@ -21,12 +21,14 @@ func personCreate(w http.ResponseWriter, r *http.Request) {
     err := json.NewDecoder(r.Body).Decode(&u)
     if err != nil {
         http.Error(w, err.Error(), http.StatusBadRequest)
+        fmt.Fprintf("bad request")
         return
     }
 
 
     // Do something with the Person struct...
     fmt.Fprintf(w, "User: %+v", u)
+
 }
 
 func main() {
