@@ -33,7 +33,7 @@ func personCreate(w http.ResponseWriter, r *http.Request) {
     	w.WriteHeader(http.StatusCreated)
     }
     if u.Email != "donny"{
-    	http.Error(w, err.Error(), http.StatusBadRequest)
+    	w.WriteHeader(http.StatusBadRequest)
     }
 
     data, err := json.Marshal(u)
